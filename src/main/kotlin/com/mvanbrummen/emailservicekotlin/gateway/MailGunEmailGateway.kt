@@ -26,12 +26,12 @@ class MailGunEmailGateway(
 
     private fun buildForm(emailSendRequest: EmailSendRequest): LinkedMultiValueMap<String, String> {
         val form = LinkedMultiValueMap<String, String>()
-        form.put("to", (emailSendRequest.to ?: listOf()).map(Person::email))
-        form.put("from", listOf(emailSendRequest.from?.email))
-        form.put("subject", listOf(emailSendRequest.subject))
-        form.put("text", listOf(emailSendRequest.content))
-        form.put("cc", emailSendRequest.cc.map(Person::email))
-        form.put("bcc", emailSendRequest.bcc.map(Person::email))
+        form["to"] = (emailSendRequest.to ?: listOf()).map(Person::email)
+        form["from"] = listOf(emailSendRequest.from?.email)
+        form["subject"] = listOf(emailSendRequest.subject)
+        form["text"] = listOf(emailSendRequest.content)
+        form["cc"] = emailSendRequest.cc.map(Person::email)
+        form["bcc"] = emailSendRequest.bcc.map(Person::email)
 
         return form
     }

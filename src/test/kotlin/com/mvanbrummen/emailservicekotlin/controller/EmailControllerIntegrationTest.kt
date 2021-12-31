@@ -3,7 +3,6 @@ package com.mvanbrummen.emailservicekotlin.controller
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mvanbrummen.emailservicekotlin.TestData
 import com.mvanbrummen.emailservicekotlin.api.EmailSendRequest
-import com.mvanbrummen.emailservicekotlin.api.Person
 import com.mvanbrummen.emailservicekotlin.exception.EmailGatewayDownException
 import com.mvanbrummen.emailservicekotlin.service.EmailService
 import org.junit.jupiter.api.Test
@@ -48,7 +47,7 @@ internal class EmailControllerIntegrationTest @Autowired constructor(
             post("/email/send")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(request))
-        ).andExpect(status().isAccepted)
+        )
 
         verify(emailService).sendEmail(request)
     }

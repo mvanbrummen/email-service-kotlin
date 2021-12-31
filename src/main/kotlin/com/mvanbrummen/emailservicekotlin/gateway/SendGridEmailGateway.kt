@@ -15,7 +15,7 @@ class SendGridEmailGateway(
     override fun sendEmail(emailSendRequest: EmailSendRequest) {
         try {
             val resp = post("$apiBaseUrl/mail/send", data = JSONObject(fromEmailSendRequest(emailSendRequest)))
-            if (resp.statusCode != HttpStatus.NO_CONTENT.value()) {
+            if (resp.statusCode != HttpStatus.ACCEPTED.value()) {
                 handleError("Email gateway returned ${resp.statusCode}", emailSendRequest)
             }
         } catch (ex: Exception) {

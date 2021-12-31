@@ -6,7 +6,6 @@ import com.mvanbrummen.emailservicekotlin.exception.EmailGatewayDownException
 import khttp.post
 import org.springframework.http.HttpStatus
 import org.springframework.util.LinkedMultiValueMap
-import org.springframework.util.MultiValueMap
 
 class MailGunEmailGateway(
     private val nextGateway: EmailGateway?,
@@ -25,7 +24,7 @@ class MailGunEmailGateway(
         }
     }
 
-    private fun buildForm(emailSendRequest: EmailSendRequest): MultiValueMap<String, String> {
+    private fun buildForm(emailSendRequest: EmailSendRequest): LinkedMultiValueMap<String, String> {
         val form = LinkedMultiValueMap<String, String>()
         form.put("to", (emailSendRequest.to ?: listOf()).map(Person::email))
         form.put("from", listOf(emailSendRequest.from?.email))

@@ -6,8 +6,8 @@ import com.mvanbrummen.emailservicekotlin.api.Person
 class TestData {
     companion object {
         val emailSendRequest = EmailSendRequest(
-            to = listOf(Person(email = "test123@gmail.com", name = "John Doe")),
-            from = Person(email = "foobar@icloud.com", name = "Jane Doe"),
+            to = listOf(Person(email = "test123@gmail.com")),
+            from = Person(email = "foobar@icloud.com"),
             cc = listOf(),
             bcc = listOf(),
             content = "Test Content",

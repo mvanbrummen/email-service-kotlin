@@ -2,6 +2,8 @@ package com.mvanbrummen.emailservicekotlin.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mvanbrummen.emailservicekotlin.TestData
+import com.mvanbrummen.emailservicekotlin.api.EmailSendRequest
+import com.mvanbrummen.emailservicekotlin.api.Person
 import com.mvanbrummen.emailservicekotlin.exception.EmailGatewayDownException
 import com.mvanbrummen.emailservicekotlin.service.EmailService
 import org.junit.jupiter.api.Test
@@ -51,13 +53,14 @@ internal class EmailControllerIntegrationTest @Autowired constructor(
         verify(emailService).sendEmail(request)
     }
 
-    // TODO
     @Test
     fun `should return 400 error when mandatory fields are missing`() {
+        val request = EmailSendRequest()
+
         mockMvc.perform(
             post("/email/send")
                 .contentType("application/json")
-                .content("""{"from": null}""")
+                .content(objectMapper.writeValueAsString(request))
         )
             .andExpect(status().isBadRequest)
             .andExpect(
@@ -74,7 +77,6 @@ internal class EmailControllerIntegrationTest @Autowired constructor(
             )
     }
 
-    // TODO
     @Test
     fun `should return 400 error when email validation fails`() {
         val request = TestData.emailSendRequestInvalidEmails

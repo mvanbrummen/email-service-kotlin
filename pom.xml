@@ -62,6 +62,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.specto</groupId>
+			<artifactId>hoverfly-java-junit5</artifactId>
+			<version>0.14.1</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

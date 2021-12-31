@@ -5,9 +5,9 @@ import com.mvanbrummen.emailservicekotlin.api.Person
 import org.springframework.http.MediaType
 
 data class SendGridEmailRequest(
-    val from: Person,
+    val from: Person?,
     val personalizations: List<Personalizations>,
-    val subject: String,
+    val subject: String?,
     val content: List<Content>,
 )
 
@@ -17,7 +17,7 @@ fun fromEmailSendRequest(emailSendRequest: EmailSendRequest): SendGridEmailReque
         subject = emailSendRequest.subject,
         personalizations = listOf(
             Personalizations(
-                to = emailSendRequest.to,
+                to = emailSendRequest.to ?: throw IllegalAccessException("to was not set"),
                 cc = emailSendRequest.cc,
                 bcc = emailSendRequest.bcc
             )
@@ -39,5 +39,5 @@ data class Personalizations(
 
 data class Content(
     val type: String,
-    val value: String
+    val value: String?
 )

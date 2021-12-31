@@ -8,17 +8,17 @@ class TestData {
         val emailSendRequest = EmailSendRequest(
             to = listOf(Person(email = "test123@gmail.com", name = "John Doe")),
             from = Person(email = "foobar@icloud.com", name = "Jane Doe"),
-            cc = listOf(Person(email = "foobar@icloud.com", name = "Mr Test")),
-            bcc = listOf(Person(email = "test@example.com", name = "Mr Test")),
+            cc = listOf(),
+            bcc = listOf(),
             content = "Test Content",
             subject = "Test Subject"
         )
 
         val emailSendRequestInvalidEmails = EmailSendRequest(
-            to = listOf(Person(email = "test123@gmail.com", name = "John Doe")),
-            from = Person(email = "foobar@icloud.com", name = "Jane Doe"),
-            cc = listOf(Person(email = "#@%^%#\$@#\$@#.com", name = "Mr Test")),
-            bcc = listOf(Person(email = "@example.com", name = "Mr Test")),
+            to = listOf(Person(email = "plainaddress", name = "John Doe")),
+            from = Person(email = "#@%^%#\$@#\$@#.com", name = "Jane Doe"),
+            cc = listOf(Person(email = "@example.com", name = "Mr Test")),
+            bcc = listOf(Person(email = "@example.com (Joe Smith)", name = "Mr Test")),
             content = "Test Content",
             subject = "Test Subject"
         )

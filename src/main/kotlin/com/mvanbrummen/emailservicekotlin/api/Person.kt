@@ -1,8 +1,9 @@
 package com.mvanbrummen.emailservicekotlin.api
 
 import javax.validation.constraints.Email
+import javax.validation.constraints.NotNull
 
 data class Person(
-    @Email val email: String,
-    val name: String
+    @get:NotNull @get:Email val email: String? = null,
+    val name: String? = null
 )

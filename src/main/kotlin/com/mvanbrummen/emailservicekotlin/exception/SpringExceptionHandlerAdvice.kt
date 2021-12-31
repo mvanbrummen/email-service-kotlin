@@ -1,6 +1,7 @@
 package com.mvanbrummen.emailservicekotlin.exception
 
 import org.springframework.http.HttpStatus
+import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -13,11 +14,12 @@ class SpringExceptionHandlerAdvice {
     @ExceptionHandler
     fun handleValidationExceptions(ex: MethodArgumentNotValidException): Map<String, String> {
         val errors = HashMap<String, String>()
-        ex.bindingResult.allErrors.map {
-            val fieldName = it.objectName
-            val errorMessage = it.defaultMessage
-
-            errors.put(fieldName, errorMessage ?: "")
+        ex.bindingResult.allErrors.forEach {
+            if (it is FieldError) {
+                val fieldName = it.field
+                val errorMessage = it.defaultMessage
+                errors[fieldName] = errorMessage ?: ""
+            }
         }
 
         return errors

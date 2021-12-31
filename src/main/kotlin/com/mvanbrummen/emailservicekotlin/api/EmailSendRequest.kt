@@ -3,16 +3,17 @@ package com.mvanbrummen.emailservicekotlin.api
 import com.fasterxml.jackson.annotation.JsonInclude
 import javax.validation.Valid
 import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 data class EmailSendRequest(
-    @Valid val from: Person,
+    @get:NotNull @get:Valid val from: Person? = null,
 
-    val subject: String,
-    val content: String,
+    @get:NotNull val subject: String? = null,
+    @get:NotNull val content: String? = null,
 
-    @NotEmpty @Valid val to: List<Person>,
-    @Valid val cc: List<Person>,
-    @Valid val bcc: List<Person>,
+    @get:NotEmpty @get:Valid val to: List<Person>? = null,
+    @get:Valid val cc: List<Person> = emptyList(),
+    @get:Valid val bcc: List<Person> = emptyList(),
 
     )

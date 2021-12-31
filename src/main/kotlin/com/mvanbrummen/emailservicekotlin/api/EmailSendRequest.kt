@@ -1,8 +1,10 @@
 package com.mvanbrummen.emailservicekotlin.api
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import javax.validation.Valid
 import javax.validation.constraints.NotEmpty
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 data class EmailSendRequest(
     @Valid val from: Person,
 

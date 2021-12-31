@@ -9,8 +9,8 @@ import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 
 class MailGunEmailGateway(
-    val nextGateway: EmailGateway?,
-    val apiBaseUrl: String
+    private val nextGateway: EmailGateway?,
+    private val apiBaseUrl: String
 ) : EmailGateway, EmailGatewayChain {
     override fun sendEmail(emailSendRequest: EmailSendRequest) {
         val form = buildForm(emailSendRequest)

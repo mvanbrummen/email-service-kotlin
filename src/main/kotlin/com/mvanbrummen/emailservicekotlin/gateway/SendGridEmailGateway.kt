@@ -8,8 +8,8 @@ import org.json.JSONObject
 import org.springframework.http.HttpStatus
 
 class SendGridEmailGateway(
-    val nextGateway: EmailGateway?,
-    val apiBaseUrl: String
+    private val nextGateway: EmailGateway?,
+    private val apiBaseUrl: String
 ) : EmailGateway, EmailGatewayChain {
 
     override fun sendEmail(emailSendRequest: EmailSendRequest) {

@@ -1,0 +1,6 @@
+email:
+  gateway:
+    sendgrid:
+      api-key: test-api-key1
+    mailgun:
+      api-key: test-api-key2

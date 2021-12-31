@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @RestController
-class EmailController(val emailService: EmailService) {
+class EmailController(private val emailService: EmailService) {
 
     @PostMapping("/email/send")
     fun sendEmail(@Valid @RequestBody emailSendRequest: EmailSendRequest): ResponseEntity<Void> {
         emailService.sendEmail(emailSendRequest)
 
-        return ResponseEntity.noContent().build()
+        return ResponseEntity.accepted().build()
     }
 }

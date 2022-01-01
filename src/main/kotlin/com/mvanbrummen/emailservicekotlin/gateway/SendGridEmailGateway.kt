@@ -23,13 +23,9 @@ class SendGridEmailGateway(
         }
     }
 
-    private fun handleError(message: String, emailSendRequest: EmailSendRequest) {
-        if (next() == null) {
-            throw EmailGatewayDownException(message)
-        } else {
-            next()?.sendEmail(emailSendRequest)
-        }
-    }
+    private fun handleError(message: String, emailSendRequest: EmailSendRequest) =
+        if (next() == null) throw EmailGatewayDownException(message)
+        else next()?.sendEmail(emailSendRequest)
 
     override fun next(): EmailGateway? = nextGateway
 

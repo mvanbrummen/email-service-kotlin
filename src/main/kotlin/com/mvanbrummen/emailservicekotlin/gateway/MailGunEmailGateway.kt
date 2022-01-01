@@ -26,7 +26,7 @@ class MailGunEmailGateway(
 
     private fun buildForm(emailSendRequest: EmailSendRequest): LinkedMultiValueMap<String, String> {
         val form = LinkedMultiValueMap<String, String>()
-        form["to"] = (emailSendRequest.to ?: listOf()).map(Person::email)
+        form["to"] = (emailSendRequest.to ?: emptyList()).map(Person::email)
         form["from"] = listOf(emailSendRequest.from?.email)
         form["subject"] = listOf(emailSendRequest.subject)
         form["text"] = listOf(emailSendRequest.content)
@@ -36,13 +36,9 @@ class MailGunEmailGateway(
         return form
     }
 
-    private fun handleError(message: String, emailSendRequest: EmailSendRequest) {
-        if (next() == null) {
-            throw EmailGatewayDownException(message)
-        } else {
-            next()?.sendEmail(emailSendRequest)
-        }
-    }
+    private fun handleError(message: String, emailSendRequest: EmailSendRequest) =
+        if (next() == null) throw EmailGatewayDownException(message)
+        else next()?.sendEmail(emailSendRequest)
 
     override fun next(): EmailGateway? = nextGateway
 }
